@@ -76,10 +76,10 @@ void write_Project_To_File()
 
 int main()
 {   
-    write_Project_To_File();
-    cout<<" file has been create";
-    // Ui ui;
-    // ui.MainInterface();
+    // write_Project_To_File();
+    // cout<<" file has been create";
+    Ui ui;
+    ui.MainInterface();
 
     //ui.ChooseToEdit();
     // Company *c1;

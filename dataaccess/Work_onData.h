@@ -20,6 +20,6 @@ public:
     Work_on Get(int);
     Work_onData(string);
     int ExportToFile(string filename);
-    //void Edit_Table();
+    void Edit_Table();
 };
 #endif

@@ -17,41 +17,39 @@ void Ui::DisplayDependent()
     {
         Dependent dependent = dependentData.Get(i);
         cout<< dependent.ToString()<<endl;
-        cout<<endl;
     }
 }
 
-// void Ui::DisplayProject()
-// {
-//     ProjectData projectData("Project.data");
-//     for(int i = 0; i<projectData.GetSize() ; i++)
-//     {
-//         Project project = projectData.Get(i);
-//         cout<< project.ToString()<<endl;
-//         cout<<endl;
-//     }
-// }
+void Ui::DisplayProject()
+{
+    ProjectData projectData("Project.data");
+    for(int i = 0; i<projectData.GetSize() ; i++)
+    {
+        Project project = projectData.Get(i);
+        cout<< project.ToString()<<endl;
+    }
+}
+void Ui::DisplayWork_on()
+{
+    Work_onData work_onData("Work_on.data");
+    for(int i =0;i<work_onData.GetSize();i++)
+    {
+        Work_on work_on = work_onData.Get(i);
+        cout<< work_on.ToString()<<endl;
+    }
+}
 
-// void Ui::DisplayWork_on()
-// {
-//     Work_onData work_onData("Work_on.data");
-//     for(int i =0;i<work_onData.GetSize();i++)
-//     {
-//         Work_on work_on = work_onData.Get(i);
-//         cout<< work_on.ToString()<<endl;
-//     }
-// }
+void Ui::DisplayDepartment()
+{
+    DepartmentData departmentData("Department.data");
+    for(int i =0;i<departmentData.GetSize();i++)
+    {
+        Department department = departmentData.Get(i);
+        cout<< department.ToString()<<endl;
+    }
+}
 
-// void Ui::DisplayWork_on()
-// {
-//     Work_onData mwork_onData("Work_on.data");
-//     for( int i = 0; i < mwork_onData.GetSize(); i++ )
-//     {
-//         Work_on work_on = mwork_onData.Get(i);
-//         cout<< work_on.ToString()<<endl;
-//         cout<<endl;
-//     }
-// }
+
 
 void Ui::MainInterface()
 {
@@ -99,20 +97,35 @@ void Ui::ChooseTable()
         {
         case 1:
             ChooseFuntion(SubChoice);
-        break;
-        
+            break;
+        case 2:
+            ChooseFuntion(SubChoice);
+            break;
+        case 3:
+            ChooseFuntion(SubChoice);
+            break;
+        case 4:
+            ChooseFuntion(SubChoice);
+            break;
+        case 5:
+            ChooseFuntion(SubChoice);
+            break;
+        case 6:
+            ChooseFuntion(SubChoice);
+            break;
         default:
+            cout<<" Please Enter again";
             break;
         }
     }
     while(Iscontinue==true);
 }
 
-void Ui:: ChooseFuntion(int Subchoice)
+void Ui:: ChooseFuntion(int &Subchoice)
 {   bool Iscontinue = true;
     do
     {
-    
+
         int Subchoice2;
         cout<<"**************************************************************"<<endl;
         cout<<"#####          select the function you want to use      ######"<<endl;
@@ -127,18 +140,47 @@ void Ui:: ChooseFuntion(int Subchoice)
         switch (Subchoice2)
         {
         case 1:
-            if(Subchoice ==1)
+            if(Subchoice == 1)
+            {
+                DisplayEmployee();
+            }
+            if(Subchoice == 2)
+            {
+                //Display();
+            }
+            if(Subchoice ==3)
             {
                 //DisplayProject();
-                //DisplayEmployee();
-                //DisplayDependent();
+                DisplayEmployee();
+            }
+            if(Subchoice == 4)
+            {
+                DisplayProject();
+            }
+            if(Subchoice == 5)
+            {
+                DisplayWork_on();
+            }
+            if(Subchoice == 6)
+            {
+                DisplayProject();
             }
             break;
         case 2:
-            if(Subchoice = 1)
+            if(Subchoice == 1)
             {   
                 EmployeeData employeeData;
                 employeeData.Edit_Table();
+            }
+            if(Subchoice == 4)
+            {
+                ProjectData projectData;
+                projectData.Edit_Table();
+            }
+            if(Subchoice == 5)
+            {
+                Work_onData work_onData;
+                work_onData.Edit_Table();
             }
             if(Subchoice == 6)
             {
@@ -291,6 +333,41 @@ Work_on EnterWork_onInfor(Work_on &work_on)
         break;
     }
     return work_on;
+}
+
+Project EnterProjectInfor(Project &project)
+{   
+    int n;
+    cout<<"Choose Information that you want to edit"<<endl;
+    cout<<"1. ESSN : "<<endl;
+    cout<<"2. PNO : "<<endl;
+    cout<<"3. Hours : "<<endl;
+    cout<<"0. Stop"<<endl;
+    cout<<"Your Choice: ";
+    cin >> n;
+    switch (n)
+    {
+    case 1:
+        cout<<"Enter PName: ";
+        cin >> project.PName;
+        break;
+    case 2: 
+        cout<<"Enter PNumber: ";
+        cin >> project.PNumber;
+        break;
+    case 3: 
+        cout<<"Enter PLocation: ";
+        cin >> project.PLocation;
+        break;
+    case 4: 
+        cout<<"Enter DNum: ";
+        cin >> project.DNum;
+        break;
+    default:
+    cout<<" please Enter Again";
+        break;
+    }
+    return project;
 }
 
 int Ui::ChooseToEdit()

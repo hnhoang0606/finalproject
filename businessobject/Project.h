@@ -22,5 +22,6 @@ public:
     Project(int , string ,string ,int ,int );
     string ToString();
     json ToJson();
+    friend Project EnterProjectInfor(Project &project);
 };
 #endif

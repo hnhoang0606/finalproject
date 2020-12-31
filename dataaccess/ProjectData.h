@@ -4,11 +4,12 @@
 #include <vector>
 #include <iostream>
 #include "CompanyData.h"
-#include "../businessobject/Project.h" 
+#include "../businessobject/Project.h"
+#include "../ui/ui.h" 
 
 using namespace std;
 
-class ProjectData {
+class ProjectData: public CompanyData{
 private:
     vector<Project> _data;
     int _maxId;
@@ -22,6 +23,8 @@ public:
     int GetSize();
     Project Get(int i);
     int ExportToFile(string );
+    void Edit_Table();
+
     // bool AddMember(Company* ) override;
     // bool DeleteMember(int ) override;
     

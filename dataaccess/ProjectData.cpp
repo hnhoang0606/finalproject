@@ -21,8 +21,8 @@ ProjectData::ProjectData(string fileName)
         Project p(
             j["Id"],
             j["PName"],
-            j["PNumber"],
             j["PLocation"],
+            j["PNumber"],
             j["DNum"]
         );
         _data.push_back(p);
@@ -74,6 +74,18 @@ int ProjectData::ExportToFile(string fileName)
     }
     outFile.close();
     return 1;
+}
+
+void ProjectData::Edit_Table()
+{
+    Ui ui;
+    int i;
+    Project project;
+    ProjectData projectData("Project.data");
+    i = ui.ChooseToEdit();
+    project = projectData._data[i];
+    projectData._data[i] = EnterProjectInfor(project);
+    projectData.ExportToFile("Project.data");
 }
 
 // bool ProjectData::AddMember(Company* company)

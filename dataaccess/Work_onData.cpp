@@ -80,17 +80,16 @@ int Work_onData :: ExportToFile(string filename)
 }
 
 
-
-// void Work_onData ::Edit_Table()
-// {
-//     Ui ui;
-//     int i;
-//     //i = ui.ChooseToEdit();
-//     cout<<i;
-//     Work_on work_on = EnterInformation();
-//     Work_onData work_onData("Employee.data");
-//     work_onData._data[i] = employee;
-//     work_onData.ExportToFile("Employee.data");
-// }
+void Work_onData ::Edit_Table()
+{
+    Ui ui;
+    int i;
+    Work_on work_on;
+    Work_onData work_onData("Work_on.data");
+    i = ui.ChooseToEdit();
+    work_on = work_onData._data[i];
+    work_onData._data[i] = EnterWork_onInfor(work_on);
+    work_onData.ExportToFile("Work_on.data");
+}
 
 
