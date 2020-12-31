@@ -1,0 +1,2 @@
+build command
+g++ main.cpp businessobject/Employee.cpp businessobject/Project.cpp businessobject/Work_on.cpp businessobject/Dependent.cpp dataaccess/EmployeeData.cpp dataaccess/ProjectData.cpp dataaccess/Work_onData.cpp dataaccess/DependentData.cpp ui/ui.cpp -o main.exe
