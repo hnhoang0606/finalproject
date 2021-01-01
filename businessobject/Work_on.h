@@ -3,16 +3,18 @@
 #include <string>
 #include<iostream>
 #include "../libs/json.hpp"
+#include "Company.h"
 #include "../dataaccess/CompanyData.h"
 using namespace std;
 using nlohmann::json;
 
-class Work_on{
+class Work_on : public Company{
     int Id;
     long ESSN;
     int PNO;
     float Hours;
 public:
+    friend class Work_onData;
     // Default Contructor
     Work_on();
     // Contructor with paramaters

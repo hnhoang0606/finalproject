@@ -72,6 +72,31 @@ int DependentData::ExportToFile(string filename){
     return 1;
 }
 
+ bool DependentData::AddMember(Company* company){
+    _maxId++;
+    Dependent* dependent = (Dependent*)company;
+    dependent->Id = _maxId;
+    _data.push_back(*dependent);
+    return true;
+}
+
+bool DependentData::DeleteMember(int i){
+    if(i < 0){
+        return false;
+    }else{
+        for(int index=i; index<_data.size()-1; ++index){
+            _data[index].Id = _data[index+1].Id - 1;
+            _data[index].ESSN = _data[index+1].ESSN;
+            _data[index].DependentName = _data[index+1].DependentName;
+            _data[index].Sex = _data[index+1].Sex;
+            _data[index].BDate = _data[index+1].BDate;
+            _data[index].Relationship = _data[index+1].Relationship;
+        }
+        _data.pop_back();
+    return true;   
+    }
+}
+
 void DependentData :: Edit_Table()
 {
     Ui ui;

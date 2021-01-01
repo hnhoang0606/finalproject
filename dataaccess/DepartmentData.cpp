@@ -81,26 +81,26 @@ void DepartmentData :: Edit_Table ()
     departmentData.ExportToFile("Department.data");
 }
 
-// bool DepartmentData::AddMember(Company* company){
-//     _maxId++;
-//     Department* department = (Department*)company;
-//     department->Id = _maxId;
-//     _data.push_back(*department);
-//     return true;
-// }
+bool DepartmentData::AddMember(Company* company){
+    _maxId++;
+    Department* department = (Department*)company;
+    department->Id = _maxId;
+    _data.push_back(*department);
+    return true;
+}
 
-// bool DepartmentData::DeleteMember(int i){
-//     if(i < 0){
-//         return false;
-//     }else{
-//         for(int index=i; index<_data.size()-1; ++index){
-//             _data[index].Id = _data[index+1].Id - 1;
-//             _data[index].DName = _data[index+1].DName;
-//             _data[index].MgrSSN = _data[index+1].MgrSSN;
-//             _data[index].MgrStartDate = _data[index+1].MgrStartDate;
-//             _data[index].Dnumber = _data[index+1].Dnumber;
-//         }
-//         _data.pop_back();
-//     return true;   
-//     }
-// }
+bool DepartmentData::DeleteMember(int i){
+    if(i < 0){
+        return false;
+    }else{
+        for(int index=i; index<_data.size()-1; ++index){
+            _data[index].Id = _data[index+1].Id - 1;
+            _data[index].DName = _data[index+1].DName;
+            _data[index].MgrSSN = _data[index+1].MgrSSN;
+            _data[index].MgrStartDate = _data[index+1].MgrStartDate;
+            _data[index].Dnumber = _data[index+1].Dnumber;
+        }
+        _data.pop_back();
+    return true;   
+    }
+}

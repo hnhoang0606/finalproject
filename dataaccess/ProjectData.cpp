@@ -88,27 +88,27 @@ void ProjectData::Edit_Table()
     projectData.ExportToFile("Project.data");
 }
 
-// bool ProjectData::AddMember(Company* company)
-// {
-//     _maxId++;
-//     Project* project = (Project*)company;
-//     project->Id = _maxId;
-//     _data.push_back(*project);
-//     return true;
-// }
-// bool ProjectData::DeleteMember(int i)
-// {
-//     if(i < 0){
-//         return false;
-//     }else{
-//         for(int index = i; index < _data.size()-1; ++index){
-//             _data[index].Id = _data[index+1].Id - 1;
-//             _data[index].PName = _data[index+1].PName;
-//             _data[index].PNumber = _data[index+1].PNumber;
-//             _data[index].PLocation = _data[index+1].PLocation;
-//             _data[index].DNum = _data[index+1].DNum;
-//         }
-//         _data.pop_back();
-//     return true;   
-//     }
-// }
+bool ProjectData::AddMember(Company* company)
+{
+    _maxId++;
+    Project* project = (Project*)company;
+    project->Id = _maxId;
+    _data.push_back(*project);
+    return true;
+}
+bool ProjectData::DeleteMember(int i)
+{
+    if(i < 0){
+        return false;
+    }else{
+        for(int index = i; index < _data.size()-1; ++index){
+            _data[index].Id = _data[index+1].Id - 1;
+            _data[index].PName = _data[index+1].PName;
+            _data[index].PNumber = _data[index+1].PNumber;
+            _data[index].PLocation = _data[index+1].PLocation;
+            _data[index].DNum = _data[index+1].DNum;
+        }
+        _data.pop_back();
+    return true;   
+    }
+}

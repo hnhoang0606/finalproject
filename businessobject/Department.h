@@ -2,12 +2,14 @@
 #define _DEPARTRMENT_H_
 #include <string>
 #include "../libs/json.hpp"
-//#include "Company.h"
+#include "Company.h"
+#include<iostream>
+#include "../dataaccess/CompanyData.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-class Department {
+class Department : public Company{
     int Id;
     string DName;
     long MgrSSN;

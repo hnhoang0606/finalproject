@@ -6,13 +6,14 @@
 #include "../businessobject/Work_on.h"
 #include "../businessobject/Project.h"
 #include "../businessobject/Department.h"
+#include "../businessobject/DeptLocations.h"
 #include "../dataaccess/EmployeeData.h"
 #include "../dataaccess/DependentData.h"
 #include "../dataaccess/Work_onData.h"
 #include "../dataaccess/ProjectData.h"
 #include "../dataaccess/DepartmentData.h"
+#include "../dataaccess/DeptLocationsData.h"
 
-//#include "../dataaccess/Work_onData.h"
 using namespace std;
 
 class Ui 
@@ -24,13 +25,27 @@ class Ui
         void ChooseTable();
         void ChooseOption();
         int ChooseToEdit();
+
         void DisplayEmployee();
         void DisplayDependent();
         void DisplayWork_on();
         void DisplayProject();
         void DisplayDepartment();
-        void Create();
-        void Delete();
+        void DisplayDeptLocations();
+
+        void CreateEmployee();
+        void CreateDepartment();
+        void CreateProject();
+        void CreateWork_on();
+        void CreateDependent();
+        void CreateDeptLocations();
+
+        void DeleteEmployee();
+        void DeleteProject();
+        void DeleteDepartment();
+        void DeleteWork_on();
+        void DeleteDependent();
+        void DeleteDeptLocations();
 };
 
 Employee EnterEmployeeInfor(Employee &employee);
@@ -38,5 +53,6 @@ Dependent EnterDependentInfor(Dependent &dependent);
 Work_on EnterWork_onInfor(Work_on &Work_on);
 Project EnterProjectInfor(Project &project);
 Department EnterDepartmentInfor(Department &department);
+DeptLocations EnterDeptLocationInfor(DeptLocations &deptLocations);
 
 #endif

@@ -49,7 +49,15 @@ void Ui::DisplayDepartment()
     }
 }
 
-
+void Ui::DisplayDeptLocations()
+{
+    DeptLocationsData deptLocationsData("DeptLocations.data");
+    for(int i = 0; i<deptLocationsData.GetSize(); i++)
+    {
+        DeptLocations deptLocations = deptLocationsData.Get(i);
+        cout<< deptLocations.ToString()<<endl;
+    }
+}
 
 void Ui::MainInterface()
 {
@@ -77,7 +85,8 @@ void Ui::MainInterface()
 
 
 void Ui::ChooseTable()
-{   bool Iscontinue = true;
+{   system("cls");
+    bool Iscontinue = true;
     do 
     {
         int SubChoice;
@@ -117,12 +126,18 @@ void Ui::ChooseTable()
             cout<<" Please Enter again";
             break;
         }
+        if(SubChoice == 0)
+        {
+            Iscontinue = false ;
+            system("cls");
+        }
     }
     while(Iscontinue==true);
 }
 
 void Ui:: ChooseFuntion(int &Subchoice)
-{   bool Iscontinue = true;
+{   system("cls");
+    bool Iscontinue = true;
     do
     {
 
@@ -150,8 +165,7 @@ void Ui:: ChooseFuntion(int &Subchoice)
             }
             if(Subchoice ==3)
             {
-                //DisplayProject();
-                DisplayEmployee();
+                DisplayDeptLocations();
             }
             if(Subchoice == 4)
             {
@@ -163,7 +177,7 @@ void Ui:: ChooseFuntion(int &Subchoice)
             }
             if(Subchoice == 6)
             {
-                DisplayProject();
+                DisplayDependent();
             }
             break;
         case 2:
@@ -176,6 +190,11 @@ void Ui:: ChooseFuntion(int &Subchoice)
             {
                 DepartmentData departmentData;
                 departmentData.Edit_Table();
+            }
+            if(Subchoice == 3)
+            {
+                DeptLocationsData deptLocationsData;
+                deptLocationsData.Edit_Table();
             }
             if(Subchoice == 4)
             {
@@ -196,15 +215,60 @@ void Ui:: ChooseFuntion(int &Subchoice)
         case 3:
             if(Subchoice == 1)
             {   
-                Create();
+                CreateEmployee();
+            }
+            if(Subchoice == 2)
+            {   
+                CreateDepartment();
+            }
+            if(Subchoice == 3)
+            {   
+                CreateDeptLocations();
+            }
+            if(Subchoice == 4)
+            {   
+                CreateProject();
+            }
+            if(Subchoice == 5)
+            {   
+                CreateWork_on();
+            }
+            if(Subchoice == 6)
+            {   
+                CreateDependent();
             }
             break;
         case 4:
             if(Subchoice == 1)
             {
-                Delete();
+                DeleteEmployee();
+            }
+            if(Subchoice == 2)
+            {
+                DeleteDepartment();
+            }
+            if(Subchoice == 3)
+            {
+                DeleteDeptLocations();
+            }
+            if(Subchoice == 4)
+            {
+                DeleteProject();
+            }
+            if(Subchoice == 5)
+            {
+                DeleteWork_on();
+            }
+            if(Subchoice == 6)
+            {
+                DeleteDependent();
             }
             break;
+        }
+        if(Subchoice2 == 0) 
+        {
+            Iscontinue = false;
+            system ("cls");
         }
     }
     while(Iscontinue==true );
@@ -392,8 +456,8 @@ Department EnterDepartmentInfor(Department &department)
     int n;
     cout<<"Choose Information that you want to edit"<<endl;
     cout<<"1. DName : "<<endl;
-    cout<<"2. Dnumber : "<<endl;
-    cout<<"3. MgrSSN : "<<endl;
+    cout<<"2. MgrSSN : "<<endl;
+    cout<<"3. Dnumber : "<<endl;
     cout<<"4. MgrStartDate : "<<endl;
     cout<<"0. Stop"<<endl;
     cout<<"Your Choice: ";
@@ -401,19 +465,19 @@ Department EnterDepartmentInfor(Department &department)
     switch (n)
     {
     case 1:
-        cout<<"Enter PName: ";
+        cout<<"Enter DName: ";
         cin >> department.DName;
         break;
     case 2: 
-        cout<<"Enter PNumber: ";
-        cin >> department.Dnumber;
-        break;
-    case 3: 
-        cout<<"Enter PLocation: ";
+        cout<<"Enter MgrSSN: ";
         cin >> department.MgrSSN;
         break;
+    case 3: 
+        cout<<"Enter Dnumber: ";
+        cin >> department.Dnumber;
+        break;
     case 4: 
-        cout<<"Enter DNum: ";
+        cout<<"Enter MgrStartDate: ";
         cin >> department.MgrStartDate;
         break;
     default:
@@ -421,6 +485,32 @@ Department EnterDepartmentInfor(Department &department)
         break;
     }
     return department;
+}
+
+DeptLocations EnterDeptLocationInfor(DeptLocations &deptLocations)
+{   
+    int n;
+    cout<<"Choose Information that you want to edit"<<endl;
+    cout<<"1. DNumber : "<<endl;
+    cout<<"2. DLocation : "<<endl;
+    cout<<"0. Stop"<<endl;
+    cout<<"Your Choice: ";
+    cin >> n;
+    switch (n)
+    {
+    case 1:
+        cout<<"Enter DNumber: ";
+        cin >> deptLocations.DNumber;
+        break;
+    case 2: 
+        cout<<"Enter DLocation: ";
+        cin >> deptLocations.DLocation;
+        break;
+    default:
+        cout<<" please Enter Again";
+        break;
+    }
+    return deptLocations;
 }
 
 int Ui::ChooseToEdit()
@@ -432,7 +522,7 @@ int Ui::ChooseToEdit()
     return n;
 }
 
-void Ui::Create()
+void Ui::CreateEmployee()
 {
     bool isContinue = true;       
     CompanyData* companyData = new EmployeeData("Employee.data");
@@ -470,17 +560,192 @@ void Ui::Create()
 }
 
 
-void Ui::Delete()
+// void Ui::DeleteEmployee()
+// {   int Id; 
+//     cout<<"please Enter Id of table that you want to delete"<<endl;
+//     cout<<"Id: "; cin >> Id;
+//     CompanyData* companyData= new EmployeeData("Employee.data");
+
+//     --Id;
+//     companyData->DeleteMember(Id);
+//     companyData->ExportToFile("Employee.data");
+// }
+
+void Ui::CreateDepartment()
+{
+    string dName; long mgrSSN; string mgrStartDate; int dNumber;
+    cout<<"dName: "; cin>> dName; 
+    cout<<"mgrSSN: "; cin>> mgrSSN; 
+    cout<<"mgrStartDate: "; fflush(stdin); getline(cin, mgrStartDate); 
+    cout<<"dNumber: "; cin>>dNumber; 
+    Company* pC = new Department(0, dName, mgrSSN, mgrStartDate, dNumber);
+    CompanyData* companyData = new DepartmentData("Department.data");
+    companyData->AddMember(pC);
+    companyData->ExportToFile("Department.data");
+}
+
+void Ui :: CreateProject()
+{
+    bool isContinue = true;
+    CompanyData* companyData = new ProjectData("Project.data");
+    do
+    {
+        if(isContinue == 1)
+        {
+            // int id, string pName,string pLocation,int pNumber,int dNum
+        string pName; string pLocation; int pNumber; int dNum;
+        cout<<"pName: "; fflush(stdin); getline(cin, pName); 
+        cout<<"pLocation: "; fflush(stdin); getline(cin, pLocation); 
+        cout<<"pNumber: "; cin >> pNumber; 
+        cout<<"dNum: "; cin >> dNum; 
+        Company* pC = new Project(0, pName, pLocation, pNumber, dNum);
+        companyData->AddMember(pC);
+        }
+        else if(isContinue == 0)
+        {
+        isContinue = false;
+        }
+        cout<<"0. To stop"; cin >> isContinue;
+    } while (isContinue);
+    companyData->ExportToFile("Project.data");
+}
+
+void Ui::CreateWork_on(){    
+    bool isContinue = true;
+    CompanyData* companyData = new Work_onData("Work_on.data");
+
+    do
+    {
+        if(isContinue == 1){    
+            int Id; long ESSN; int PNO; float Hours;
+            cout<<"ESSN: "; cin >> ESSN; 
+            cout<<"PNO: "; cin >> PNO; 
+            cout<<"Hours: "; cin >> Hours; 
+            Company* pC = new Work_on(0, ESSN, PNO, Hours);
+
+            companyData->AddMember(pC);
+
+        }
+        else if(isContinue == 0){
+            isContinue = false;
+        }
+
+        cout<<"0. To stop"; cin >> isContinue;
+
+    } while (isContinue);
+    companyData->ExportToFile("Work_on.data");
+}
+
+void Ui::CreateDependent()
+{
+    bool isContinue = true;
+    CompanyData* companyData = new DependentData("Dependent.data");
+
+    do
+    {
+        if(isContinue == 1)
+        {
+            int Id; long ESSN; string DependentName; char Sex; string BDate; string Relationship;            
+            cout<<"ESSN: "; cin>> ESSN; 
+            cout<<"DependentName: "; fflush(stdin); getline(cin, DependentName); 
+            cout<<"Sex: "; cin>> Sex; 
+            cout<<"BDate: "; fflush(stdin); getline(cin, BDate); 
+            cout<<"Relationship: "; fflush(stdin); getline(cin, Relationship); 
+            Company* pC = new Dependent(0, ESSN, DependentName, Sex, BDate, Relationship);
+            companyData->AddMember(pC);
+        }
+        else if(isContinue == 0)
+        {
+            isContinue = false;
+        }
+        cout<<"0. To stop"; cin >> isContinue;
+    } while (isContinue);
+    companyData->ExportToFile("Dependent.data");
+}
+
+void Ui::CreateDeptLocations()
+{
+    bool isContinue = true;
+    CompanyData* companyData = new DeptLocationsData("DeptLocations.data");
+    do
+    {
+        if(isContinue == 1){
+            int dNumber; string dLocation;
+            
+            cout<<"dNumber: "; cin>> dNumber; 
+            cout<<"dLocation: "; fflush(stdin); getline(cin, dLocation); 
+            Company* pC = new DeptLocations(0, dNumber, dLocation);
+            companyData->AddMember(pC);
+
+        }else if(isContinue == 0){
+            isContinue = false;
+        }
+
+        cout<<"0. To stop"; cin >> isContinue;
+
+    } while (isContinue);
+    companyData->ExportToFile("DeptLocations.data");
+
+}
+//me
+void Ui::DeleteEmployee()
 {   int Id; 
     cout<<"please Enter Id of table that you want to delete"<<endl;
     cout<<"Id: "; cin >> Id;
     CompanyData* companyData= new EmployeeData("Employee.data");
-
     --Id;
     companyData->DeleteMember(Id);
     companyData->ExportToFile("Employee.data");
 }
 
+void Ui::DeleteProject()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new ProjectData("Project.data");
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("Project.data");
+}
 
+void Ui::DeleteDepartment()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new DepartmentData("Department.data");
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("Department.data");
+}
 
+void Ui::DeleteWork_on()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new Work_onData("Work_on.data");
 
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("Work_on.data");
+}
+
+void Ui::DeleteDependent()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new DependentData("Dependent.data");
+
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("Dependent.data");
+}
+
+void Ui::DeleteDeptLocations()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new DeptLocationsData("DeptLocations.data");
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("DeptLocations.data");
+}

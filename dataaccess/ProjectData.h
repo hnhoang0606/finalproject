@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class ProjectData{
+class ProjectData : public CompanyData{
 private:
     vector<Project> _data;
     int _maxId;
@@ -24,9 +24,8 @@ public:
     Project Get(int i);
     int ExportToFile(string );
     void Edit_Table();
-
-    // bool AddMember(Company* ) override;
-    // bool DeleteMember(int ) override;
+    bool AddMember(Company* ) override;
+    bool DeleteMember(int ) override;
     
 };
 #endif

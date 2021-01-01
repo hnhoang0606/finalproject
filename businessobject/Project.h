@@ -2,11 +2,12 @@
 #define _PROJECT_H_
 #include <string>
 #include "../libs/json.hpp"
+#include "Company.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-class Project
+class Project : public Company
 {
     int Id;
     string PName;

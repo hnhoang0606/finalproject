@@ -79,6 +79,29 @@ int Work_onData :: ExportToFile(string filename)
     return 1;
 }
 
+bool Work_onData::AddMember(Company* company){
+    _maxId++;
+    Work_on* work_on = (Work_on*)company;
+    work_on->Id = _maxId;
+    _data.push_back(*work_on);
+    return true;
+}
+
+bool Work_onData::DeleteMember(int i){
+    if(i < 0){
+        return false;
+    }else{
+        for(int index=i; index < _data.size()-1; ++index){
+            _data[index].Id    = _data[index].Id-1;
+            _data[index].ESSN  = _data[index+1].ESSN;
+            _data[index].PNO   = _data[index+1].PNO;
+            _data[index].Hours = _data[index+1].Hours ;
+
+        }
+        _data.pop_back();
+        return true;
+    }
+}
 
 void Work_onData ::Edit_Table()
 {

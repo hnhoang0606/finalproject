@@ -4,13 +4,13 @@
 #include <vector>
 #include <iostream>
 #include "CompanyData.h"
-//#include "../businessobject/Company.h"
+#include "../businessobject/Company.h"
 #include "../businessobject/Department.h"
 #include "../ui/ui.h"
 
 using namespace std;
 
-class DepartmentData{
+class DepartmentData: public CompanyData{
 private:
     vector<Department> _data;
     int _maxId;
@@ -24,10 +24,10 @@ public:
     Department* GetPointer(int i);
     int GetSize();
     Department Get(int i);
-    int ExportToFile(string );
+    int ExportToFile(string ) override;
     void Edit_Table ();
-    // bool AddMember(Company* ) override;
-    // bool DeleteMember(int ) override;
+    bool AddMember(Company* ) override;
+    bool DeleteMember(int ) override;
     
 };
 #endif

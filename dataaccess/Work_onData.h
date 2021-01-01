@@ -4,10 +4,11 @@
 #include <string>
 #include "CompanyData.h"
 #include "../ui/ui.h"
+#include "../businessobject/Company.h"
 #include "../businessobject/Work_on.h"
 using namespace std;
 
-class Work_onData{
+class Work_onData : public CompanyData{
 private:
     vector <Work_on> _data;
     int _maxId;
@@ -20,6 +21,8 @@ public:
     Work_on Get(int);
     Work_onData(string);
     int ExportToFile(string filename);
+    bool AddMember(Company* ) override;
+    bool DeleteMember(int ) override;
     void Edit_Table();
 };
 #endif

@@ -4,10 +4,12 @@
 #include <string>
 #include "CompanyData.h"
 #include "../ui/ui.h"
+
 #include "../businessobject/Dependent.h"
+#include "../businessobject/Company.h"
 using namespace std;
 
-class DependentData{
+class DependentData : public CompanyData{
 private:
     vector<Dependent> _data;
     int _maxId;
@@ -20,6 +22,9 @@ public:
     int GetSize();
     Dependent Get(int);
     int ExportToFile(string filename);
+
+    bool AddMember(Company* ) override;
+    bool DeleteMember(int ) override;
     void Edit_Table();
 };
 #endif
