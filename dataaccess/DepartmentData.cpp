@@ -69,6 +69,18 @@ int DepartmentData::ExportToFile(string fileName ){
     return 1;
 }
 
+void DepartmentData :: Edit_Table ()
+{
+    Ui ui;
+    int i;
+    Department department;
+    DepartmentData departmentData("Department.data");
+    i = ui.ChooseToEdit();
+    department = departmentData._data[i];
+    departmentData._data[i] = EnterDepartmentInfor(department);
+    departmentData.ExportToFile("Department.data");
+}
+
 // bool DepartmentData::AddMember(Company* company){
 //     _maxId++;
 //     Department* department = (Department*)company;

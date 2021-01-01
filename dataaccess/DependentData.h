@@ -7,7 +7,7 @@
 #include "../businessobject/Dependent.h"
 using namespace std;
 
-class DependentData: public CompanyData{
+class DependentData{
 private:
     vector<Dependent> _data;
     int _maxId;

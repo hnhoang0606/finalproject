@@ -104,7 +104,35 @@ void EmployeeData ::Edit_Table()
     employeeData.ExportToFile("Employee.data");
 }
 
+bool EmployeeData::AddMember(Company* company){
+    _maxId++; // _maxId = 7 
+    Employee* employee =(Employee*) company;
+    employee->Id = _maxId;
+    _data.push_back(*employee);
+    return true;
+}
 
+bool EmployeeData::DeleteMember(int i){
+    if(i < 0){
+        return false;
+    }else{
+        for(int index=i; index<_data.size()-1; ++index){
+            _data[index].Id = _data[index+1].Id - 1;
+            _data[index].FName = _data[index+1].FName;
+            _data[index].MInit = _data[index+1].MInit;
+            _data[index].LName = _data[index+1].LName;
+            _data[index].SSN = _data[index+1].SSN;
+            _data[index].BDate = _data[index+1].BDate;
+            _data[index].Address = _data[index+1].Address;
+            _data[index].Sex =_data[index+1].Sex;
+            _data[index].Salary =_data[index+1].SuperSSN;
+            _data[index].SuperSSN = _data[index+1].SuperSSN;
+            _data[index].DNO = _data[index+1].DNO;  
+        }
+        _data.pop_back();
+    return true;   
+    }
+}
 
 
 // int EmployeeData::Update(int i, Products p){

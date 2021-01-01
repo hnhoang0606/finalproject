@@ -29,11 +29,14 @@ class Ui
         void DisplayWork_on();
         void DisplayProject();
         void DisplayDepartment();
+        void Create();
+        void Delete();
 };
 
 Employee EnterEmployeeInfor(Employee &employee);
 Dependent EnterDependentInfor(Dependent &dependent);
 Work_on EnterWork_onInfor(Work_on &Work_on);
 Project EnterProjectInfor(Project &project);
+Department EnterDepartmentInfor(Department &department);
 
 #endif

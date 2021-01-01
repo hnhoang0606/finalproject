@@ -7,7 +7,7 @@
 #include "../businessobject/Work_on.h"
 using namespace std;
 
-class Work_onData: public CompanyData{
+class Work_onData{
 private:
     vector <Work_on> _data;
     int _maxId;

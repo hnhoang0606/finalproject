@@ -146,7 +146,7 @@ void Ui:: ChooseFuntion(int &Subchoice)
             }
             if(Subchoice == 2)
             {
-                //Display();
+                DisplayDepartment();
             }
             if(Subchoice ==3)
             {
@@ -172,6 +172,11 @@ void Ui:: ChooseFuntion(int &Subchoice)
                 EmployeeData employeeData;
                 employeeData.Edit_Table();
             }
+            if(Subchoice == 2)
+            {
+                DepartmentData departmentData;
+                departmentData.Edit_Table();
+            }
             if(Subchoice == 4)
             {
                 ProjectData projectData;
@@ -186,6 +191,18 @@ void Ui:: ChooseFuntion(int &Subchoice)
             {
                 DependentData dependentData;
                 dependentData.Edit_Table();
+            }
+            break;
+        case 3:
+            if(Subchoice == 1)
+            {   
+                Create();
+            }
+            break;
+        case 4:
+            if(Subchoice == 1)
+            {
+                Delete();
             }
             break;
         }
@@ -370,6 +387,42 @@ Project EnterProjectInfor(Project &project)
     return project;
 }
 
+Department EnterDepartmentInfor(Department &department)
+{   
+    int n;
+    cout<<"Choose Information that you want to edit"<<endl;
+    cout<<"1. DName : "<<endl;
+    cout<<"2. Dnumber : "<<endl;
+    cout<<"3. MgrSSN : "<<endl;
+    cout<<"4. MgrStartDate : "<<endl;
+    cout<<"0. Stop"<<endl;
+    cout<<"Your Choice: ";
+    cin >> n;
+    switch (n)
+    {
+    case 1:
+        cout<<"Enter PName: ";
+        cin >> department.DName;
+        break;
+    case 2: 
+        cout<<"Enter PNumber: ";
+        cin >> department.Dnumber;
+        break;
+    case 3: 
+        cout<<"Enter PLocation: ";
+        cin >> department.MgrSSN;
+        break;
+    case 4: 
+        cout<<"Enter DNum: ";
+        cin >> department.MgrStartDate;
+        break;
+    default:
+        cout<<" please Enter Again";
+        break;
+    }
+    return department;
+}
+
 int Ui::ChooseToEdit()
 { 
     cout<<"|** Please enter the Id of the Table that you want to edit **|" <<endl;
@@ -379,8 +432,54 @@ int Ui::ChooseToEdit()
     return n;
 }
 
+void Ui::Create()
+{
+    bool isContinue = true;       
+    CompanyData* companyData = new EmployeeData("Employee.data");
+
+    while(isContinue){
+        // cout<<""
+        if(isContinue == 1){
+
+        int id; string fName; string mInit; string lName; long ssn; string bDate; string address; char sex; int salary; long superSSN; int dno;
+        
+        // cout<<"Id: "; cin>>id;
+        cout<<"First Name: "; cin>>fName; 
+        cout<<"Midle Name: "; cin>> mInit; 
+        cout<<"Last name: "; cin>>lName; 
+        cout<<"SSN: "; cin>>ssn; 
+        cout<<"Birthday: "; fflush(stdin); getline(cin, bDate); 
+        cout<<"Address: "; getline(cin, address); 
+        cout<<"Sex: "; cin>>sex; 
+        cout<<"Salary: "; cin>>salary; 
+        cout<<"super SSN "; cin>>superSSN; 
+        cout<<"DNO: "; cin>>dno;
+
+        Company* pC = new Employee(0, fName, mInit, lName, ssn, bDate, address, sex, salary, superSSN, dno);
+
+        companyData->AddMember(pC);
+        
+        }else if(isContinue == 0){
+            isContinue = false;
+        }
+        cout<< "0. stop"<<endl; 
+        cin>>isContinue;
+        
+        companyData->ExportToFile("Employee.data");
+    }
+}
 
 
+void Ui::Delete()
+{   int Id; 
+    cout<<"please Enter Id of table that you want to delete"<<endl;
+    cout<<"Id: "; cin >> Id;
+    CompanyData* companyData= new EmployeeData("Employee.data");
+
+    --Id;
+    companyData->DeleteMember(Id);
+    companyData->ExportToFile("Employee.data");
+}
 
 
 

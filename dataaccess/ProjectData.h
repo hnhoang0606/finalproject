@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class ProjectData: public CompanyData{
+class ProjectData{
 private:
     vector<Project> _data;
     int _maxId;

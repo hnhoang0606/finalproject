@@ -6,10 +6,11 @@
 #include "CompanyData.h"
 //#include "../businessobject/Company.h"
 #include "../businessobject/Department.h"
+#include "../ui/ui.h"
 
 using namespace std;
 
-class DepartmentData : public CompanyData{
+class DepartmentData{
 private:
     vector<Department> _data;
     int _maxId;
@@ -24,6 +25,7 @@ public:
     int GetSize();
     Department Get(int i);
     int ExportToFile(string );
+    void Edit_Table ();
     // bool AddMember(Company* ) override;
     // bool DeleteMember(int ) override;
     
