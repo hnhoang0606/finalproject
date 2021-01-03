@@ -26,6 +26,6 @@ public:
     void Edit_Table();
     bool AddMember(Company* ) override;
     bool DeleteMember(int ) override;
-    
+    string GetProjectName(int );
 };
 #endif

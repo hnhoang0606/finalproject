@@ -45,3 +45,13 @@ json Dependent :: ToJson()
     j["Relationship"] = Relationship;
     return j;
 }
+
+string Dependent :: GetRelationship()
+{
+    return Relationship;
+}
+
+long Dependent :: GetESSN()
+{
+    return ESSN ;
+}

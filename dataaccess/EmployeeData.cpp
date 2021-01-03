@@ -135,6 +135,40 @@ bool EmployeeData::DeleteMember(int i){
 }
 
 
+string EmployeeData::Restructure(string supervisorName){
+    long ssn = -1;
+    string employeeList = " "; 
+    for(int i = 0; i < _data.size(); ++i){
+        string s = ( (_data[i].FName) + (_data[i].LName) ); 
+        if( s == supervisorName ){
+            ssn = _data[i].SSN;
+            break;
+        }
+    }
+    // if(ssn == -1) return " ";
+    for(int i = 0; i < _data.size(); ++i){
+        if((_data[i].SuperSSN - ssn) == 0){
+            employeeList = employeeList + " ";
+            employeeList = employeeList + _data[i].FName;
+        }
+    }
+    return employeeList;
+}
+
+float EmployeeData::CalculateSalary(long mgrSSN){
+    float averageSalary = 0;
+    float countEmployee = 0;
+    for(int i = 0; i < _data.size(); ++i){
+        if(_data[i].SuperSSN == mgrSSN){
+            averageSalary += _data[i].Salary;
+            ++countEmployee;
+        }
+    }
+    averageSalary /= float(countEmployee);
+
+    return averageSalary;
+}
+
 // int EmployeeData::Update(int i, Products p){
 //     if (i < 0) return -1;
 //     if (i >= _data.size()) return -1;

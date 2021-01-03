@@ -25,5 +25,7 @@ public:
     string ToString();
     json ToJson();
     friend Dependent EnterDependentInfor(Dependent &dependent);
+    string GetRelationship();
+    long GetESSN();
 };
 #endif

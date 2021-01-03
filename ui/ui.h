@@ -46,6 +46,15 @@ class Ui
         void DeleteWork_on();
         void DeleteDependent();
         void DeleteDeptLocations();
+
+        void RestructureCompany(); //cau2
+        void EmployeeHaveChild();// cau3
+        void GetNameProjectHours(); // cau4
+        void EmployeeDontHaveProject();//cau 5
+        void AverageSalaryOfDeparment(); // cau 6
+        void AverageSalaryByGender();// cau7
+        void LastNameOfManager();//cau 8
+
 };
 
 Employee EnterEmployeeInfor(Employee &employee);

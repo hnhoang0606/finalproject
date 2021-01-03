@@ -1,2 +1,10 @@
-{"Address":"nguyenhavan","BDate":"5/6/6","DNO":33,"FName":"nguyen","Id":1,"LName":"ban","MInit":"ha","SSN":5657,"Salary":33,"Sex":"t","SuperSSN":33}
-{"Address":"dff","BDate":"ffgg","DNO":3,"FName":"ff","Id":2,"LName":"jjj","MInit":"gg","SSN":44,"Salary":33,"Sex":"t","SuperSSN":33}
+{"Address":"73Fondren,Houston,TX","BDate":"1965-01-09","DNO":900090,"FName":"havanthai","Id":1,"LName":"Smith","MInit":"B","SSN":123456789,"Salary":30000,"Sex":"M","SuperSSN":333445555}
+{"Address":"638Voss,Houston,TX","BDate":"1955-12-08","DNO":5,"FName":"Franklin","Id":2,"LName":"Wong","MInit":"T","SSN":333445555,"Salary":40000,"Sex":"M","SuperSSN":888665555}
+{"Address":"3321Castle,String,TX","BDate":"1968-07-19","DNO":4,"FName":"Alicia","Id":3,"LName":"Zelaya","MInit":"J","SSN":999887777,"Salary":25000,"Sex":"F","SuperSSN":987654321}
+{"Address":"291Berry,Bellaire,TX","BDate":"1941-06-20","DNO":4,"FName":"Jennifer","Id":4,"LName":"Wallace","MInit":"S","SSN":987654321,"Salary":43000,"Sex":"F","SuperSSN":888665555}
+{"Address":"975FireOak,Humble,TX","BDate":"1962-09-15","DNO":5,"FName":"Ramesh","Id":5,"LName":"Narayan","MInit":"K","SSN":666884444,"Salary":38000,"Sex":"M","SuperSSN":333445555}
+{"Address":"5631Rice,Houston,TX","BDate":"1972-07-31","DNO":5,"FName":"Joyce","Id":6,"LName":"English","MInit":"A","SSN":453453453,"Salary":25000,"Sex":"F","SuperSSN":333445555}
+{"Address":"980Dallas,Houston,TX","BDate":"1969-03-29","DNO":4,"FName":"Ahmad","Id":7,"LName":"Jabbar","MInit":"V","SSN":987987987,"Salary":25000,"Sex":"M","SuperSSN":987654321}
+{"Address":"450Stone,Houston,TX","BDate":"1937-11-10","DNO":1,"FName":"James","Id":8,"LName":"Borg","MInit":"E","SSN":888665555,"Salary":55000,"Sex":"M","SuperSSN":0}
+{"Address":"nguyenhadong","BDate":"2/6/98","DNO":1212,"FName":"nguyen","Id":9,"LName":"hoang","MInit":"van","SSN":343,"Salary":343000,"Sex":"t","SuperSSN":23222}
+{"Address":"67havantinh","BDate":"23/21/87","DNO":1,"FName":"ha","Id":10,"LName":"thai","MInit":"van","SSN":232,"Salary":909999,"Sex":"i","SuperSSN":22}

@@ -45,6 +45,7 @@ Work_on Work_onData :: Get(int i)
     return _data [i];
 }
 
+
 Work_onData :: Work_onData(string filename)
 {
     _maxId = 0;
@@ -115,4 +116,13 @@ void Work_onData ::Edit_Table()
     work_onData.ExportToFile("Work_on.data");
 }
 
+float Work_onData::GetHoursProject(int projectNumber){
+    float hoursProject = 0.0;
+    for(int i = 0; i < _data.size(); ++i){
+        if(_data[i].PNO == projectNumber){
+            hoursProject += _data[i].Hours; 
+        }
+    }
+    return hoursProject;
+}
 

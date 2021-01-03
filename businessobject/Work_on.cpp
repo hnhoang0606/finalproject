@@ -3,7 +3,7 @@
 // Default Contructor
 Work_on::Work_on(){}
 // Contructor with paramaters
-Work_on:: Work_on(int id, long eSSN,int pno,int hours)
+Work_on:: Work_on(int id, long eSSN,int pno,float hours)
 {
   Id = id;
   ESSN = eSSN;
@@ -38,6 +38,10 @@ json Work_on :: ToJson()
     j["ESSN"] = ESSN;
     j["PNO"] = PNO;
     j["Hours"] = Hours;
-
     return j;
+}
+
+long Work_on :: GetESSN()
+{
+    return ESSN;
 }

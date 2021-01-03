@@ -59,14 +59,194 @@ void Ui::DisplayDeptLocations()
     }
 }
 
+void Ui :: RestructureCompany()
+{
+    EmployeeData employeeArray("Employee.data");
+    cout<<"Read file function"<<"\n";
+    for(int i=0; i<employeeArray.GetSize(); ++i)
+    {
+        Employee p = employeeArray.Get(i);
+        cout<<p.ToString()<<endl;
+    }
+    string name;
+    cout<<"Please enter an administrator name:  "; cin >> name;
+    cout<<"List employee of "<<endl;
+    cout<<employeeArray.Restructure(name);
+}
+
+void Ui :: EmployeeHaveChild()
+{   long a;
+    DependentData dependentData("Dependent.data");
+    EmployeeData employeeData("Employee.data");
+    for(int i = 0 ; i < dependentData.GetSize() ; i++)
+    {   
+        a = dependentData.Get(i).GetESSN();
+        if(dependentData.Get(i).GetRelationship() == "DAUGHTER" || dependentData.Get(i).GetRelationship() == "SON")
+        {
+            for( int j = 0 ; j < employeeData.GetSize() ; j++ ) 
+            {
+                if(employeeData.Get(j).GetSSN() == a)
+                {
+                    Employee employee = employeeData.Get(j);
+                    cout<< employee.ToString() <<endl;
+                }
+            }
+        }
+    }
+}
+
+void Ui :: GetNameProjectHours()
+{
+    int projectNumber;
+    float projectHour;
+    string projectName;
+    cout<<" Enter the project number: "; cin>>projectNumber;
+    ProjectData projectData("Project.data");
+    projectName = projectData.GetProjectName(projectNumber);
+    cout<<"The project name is: "<<projectName<<endl;
+    Work_onData work_onData("Work_on.data");
+    projectHour = work_onData.GetHoursProject(projectNumber);
+    cout<<"Total hours is: "<<projectHour<<endl;
+}
+
+void Ui :: EmployeeDontHaveProject()
+{   
+    cout<<"Employees don't have any Project in Employee Table"<<endl;
+    int find = 0;
+    long ssn;
+    Work_onData work_onData("Work_on.data");
+    EmployeeData employeeData("Employee.data");
+    for (int i = 0 ; i < employeeData.GetSize() ; i++)
+    {
+        ssn = employeeData.Get(i).GetSSN();
+        for(int j = 0; j < work_onData.GetSize(); j++)
+        {
+            if(ssn == work_onData.Get(j).GetESSN()) 
+            {   
+                find = 1;
+                break;
+            }
+        }
+        if(find == 0)
+        {
+            Employee employee = employeeData.Get(i);
+            cout << employee.ToString()<< endl;
+        }
+        find = 0;
+    }
+
+}
+
+void Ui:: AverageSalaryOfDeparment()
+{
+    string departmentName;
+    cout<<"Please enter department name: "<<endl;
+    cin>>departmentName;
+    DepartmentData departmentData("Department.data");
+    EmployeeData employeeData("Employee.data");
+    for(int i = 0; i < departmentData.GetSize(); ++i){
+        if(departmentData.Get(i).GetDName() == departmentName){
+            cout<<"Department number is: "<<departmentData.Get(i).GetDnumber()<<endl;
+            cout<<"Average salary: "<<employeeData.CalculateSalary(departmentData.Get(i).GetMgrSSN())<<endl;
+            cout<< endl;
+        }
+    }
+}
+
+void Ui :: AverageSalaryByGender()
+{   
+    system("cls");
+    char c;
+    cout <<" Please enter the gender for which you want to see the average salary."<<endl;
+    cout << "1. F" <<endl;
+    cout << "2. M" <<endl;
+    cout<< "Gender: "; cin >> c;
+    int Count = 0;
+    int SalarySum = 0;
+    cout<<"Average salaries of all employees by gender"<<endl;
+    cout << endl;
+    EmployeeData employeeData("Employee.data");
+    if(c == 'F')
+    {
+        for (int i = 0 ; i < employeeData.GetSize(); i++ )
+        {   
+            Employee employee = employeeData.Get(i);
+            if( employee.GetSex() == 'F')
+            {
+                SalarySum += employee.GetSalary();
+                Count ++;
+            }
+                
+        }
+        cout<<"Average salary of female employees: "<< SalarySum/Count<<endl;
+        cout<< endl;
+    }
+    else
+    {
+        for (int i = 0 ; i < employeeData.GetSize(); i++ )
+        {   
+            Employee employee = employeeData.Get(i);
+            if( employee.GetSex() == 'M')
+            {
+                SalarySum += employee.GetSalary();
+                Count ++;
+            }
+        }
+        cout<<"Average salary of male employees: "<< SalarySum/Count<<endl;
+        cout <<endl;
+    }
+    
+}
+
+void Ui::LastNameOfManager()
+{
+    bool Check = false;
+    EmployeeData employeeData("Employee.data");
+    DepartmentData departmentData("Department.data");
+    DependentData dependentData("Dependent.data");
+    cout<<" The Last Name of the department manager is single "<<endl;
+    for( int i = 0; i < departmentData.GetSize(); i++)
+    {   
+        Department department = departmentData.Get(i);
+        long ssn = department.GetMgrSSN();
+        for(int j = 0; j < dependentData.GetSize(); j++)
+        {
+            Dependent dependent = dependentData.Get(j);
+            if(ssn == dependent.GetESSN())
+            {
+                Check = true; break;
+            } 
+        }
+        if(Check == false)
+        {
+            for(int k = 0; k < employeeData.GetSize(); k++)
+            {   
+                Employee employee = employeeData.Get(k);
+                if(ssn == employee.GetSSN())
+                {
+                    cout<< "Last name : " << employee.GetLName() << endl;
+                }
+            }
+        }
+        Check = false;
+    }
+}
+
 void Ui::MainInterface()
 {
     bool Iscontinue = true;
     do{ 
         int Choice;
-        cout<<"========================================"<<endl;
-        cout<<"**Choose funtion that you want to use **"<<endl;
-        cout<<"1. Display/..................."<<endl;
+        cout <<"==========================================================================="<<endl;
+        cout <<"********Choose funtion that you want to use *********"<<endl;
+        cout <<"1. Display/Edit/Delete/Add Element in The Table"<<endl;
+        cout <<"2. Display the names of all employees who are supervised by a particular manager"<<endl;
+        cout <<"3. Display Employee have Child" <<endl;
+        cout <<"4. Displays the specific project name and the total number of hours an employee has to work on that project"<<endl;
+        cout <<"5. Display Employees don't have any Project"<<endl;
+        cout <<"6. Displays the name of the department and the average salary of the employees working for that department."<<endl;
+        cout<< "7. Average salaries of all employees by gender"<<endl;
+        cout<< "8. The Last Name of the department manager is single"<<endl;
         cout<<"========================================"<<endl;
         cout<<"your Choice_"; cin >> Choice;
        
@@ -74,6 +254,27 @@ void Ui::MainInterface()
         {
         case 1:
             ChooseTable();
+            break;
+        case 2:
+            RestructureCompany();
+            break;
+        case 3:
+            EmployeeHaveChild();
+            break;
+        case 4:
+            GetNameProjectHours();
+            break;
+        case 5:
+            EmployeeDontHaveProject();
+            break;
+        case 6:
+            AverageSalaryOfDeparment();
+            break;
+        case 7:
+            AverageSalaryByGender();
+            break;
+        case 8:
+            LastNameOfManager();
             break;
         default:
             system("cls");
@@ -277,239 +478,329 @@ void Ui:: ChooseFuntion(int &Subchoice)
 
 Employee EnterEmployeeInfor(Employee &employee)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1.FName: "<<endl;
-    cout<<"2.MInit_: "<<endl;
-    cout<<"3.LName_: "<<endl;
-    cout<<"4.SSN_: "<<endl;
-    cout<<"5.BDate_: "<<endl;
-    cout<<"6.Address_: "<<endl;
-    cout<<"7.Salary_: "<<endl;
-    cout<<"8.SuperSSN_: "<<endl;
-    cout<<"9.DNO_: "<<endl;
-    cout<<"10.SEX_: "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    cout <<"Old Data:  ";
+    cout << employee.ToString()<<endl;
+    cout <<endl;
+    bool Iscontinue = true;
+    do
     {
-    case 1:
-        cout<<"Enter FName: ";
-        cin >> employee.FName;
-        break;
-    case 2: 
-        cout<<"Enter MInit_: ";
-        cin >> employee.MInit;
-        break;
-    case 3: 
-        cout<<"Enter LName_: ";
-        cin >> employee.LName;
-        break;
-    case 4: 
-        cout<<"Enter SSN_: ";
-        cin >> employee.SSN;
-        break;
-    case 5: 
-        cout<<"Enter BDate_: ";
-        cin >> employee.BDate;
-        break;
-    case 6: 
-        cout<<"Enter Address_: ";
-        cin >> employee.Address;
-        break;
-    case 7: 
-        cout<<"Enter Salary_: ";
-        cin >> employee.Salary;
-        break;
-    case 8: 
-        cout<<"Enter SuperSSN_: ";
-        cin >> employee.SuperSSN;
-        break;
-    case 9: 
-        cout<<"Enter DNO_: ";
-        cin >> employee.DNO;
-        break;
-    case 10: 
-        cout<<"Enter SEX_: ";
-        cin >> employee.Sex;
-        break;
-    
-    default:
-    cout<<" please Enter Again";
-        break;
-    }
-
+        int n;
+        cout<<endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1.FName: "<<endl;
+        cout<<"2.MInit_: "<<endl;
+        cout<<"3.LName_: "<<endl;
+        cout<<"4.SSN_: "<<endl;
+        cout<<"5.BDate_: "<<endl;
+        cout<<"6.Address_: "<<endl;
+        cout<<"7.Salary_: "<<endl;
+        cout<<"8.SuperSSN_: "<<endl;
+        cout<<"9.DNO_: "<<endl;
+        cout<<"10.SEX_: "<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter FName: ";
+            cin >> employee.FName;
+            break;
+        case 2: 
+            cout<<"Enter MInit_: ";
+            cin >> employee.MInit;
+            break;
+        case 3: 
+            cout<<"Enter LName_: ";
+            cin >> employee.LName;
+            break;
+        case 4: 
+            cout<<"Enter SSN_: ";
+            cin >> employee.SSN;
+            break;
+        case 5: 
+            cout<<"Enter BDate_: ";
+            cin >> employee.BDate;
+            break;
+        case 6: 
+            cout<<"Enter Address_: ";
+            cin >> employee.Address;
+            break;
+        case 7: 
+            cout<<"Enter Salary_: ";
+            cin >> employee.Salary;
+            break;
+        case 8: 
+            cout<<"Enter SuperSSN_: ";
+            cin >> employee.SuperSSN;
+            break;
+        case 9: 
+            cout<<"Enter DNO_: ";
+            cin >> employee.DNO;
+            break;
+        case 10: 
+            cout<<"Enter SEX_: ";
+            cin >> employee.Sex;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+        cout<<" please Enter Again";
+            break;
+        }
+    }while(Iscontinue == true);
+    cout <<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< employee.ToString()<<endl;
+    cout<< endl;
     return employee;
 }
 
 
 Dependent EnterDependentInfor(Dependent &dependent)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1.ESSN : "<<endl;
-    cout<<"2.DependentName : "<<endl;
-    cout<<"3.Sex : "<<endl;
-    cout<<"4.BDate : "<<endl;
-    cout<<"5.Relationship: "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    cout <<"Old Data:  ";
+    cout << dependent.ToString()<<endl;
+    cout <<endl;
+    bool Iscontinue = true;
+    do
     {
-    case 1:
-        cout<<"Enter ESSN: ";
-        cin >> dependent.ESSN;
-        break;
-    case 2: 
-        cout<<"Enter DependentName: ";
-        cin >> dependent.DependentName;
-        break;
-    case 3: 
-        cout<<"Enter Sex: ";
-        cin >> dependent.Sex;
-        break;
-    case 4: 
-        cout<<"Enter BDate: ";
-        cin >> dependent.BDate;
-        break;
-    case 5: 
-        cout<<"Enter Relationship: ";
-        cin >> dependent.Relationship;
-        break;
-    default:
-    cout<<" please Enter Again";
-        break;
-    }
+        int n;
+        cout<< endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1.ESSN : "<<endl;
+        cout<<"2.DependentName : "<<endl;
+        cout<<"3.Sex : "<<endl;
+        cout<<"4.BDate : "<<endl;
+        cout<<"5.Relationship: "<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter ESSN: ";
+            cin >> dependent.ESSN;
+            break;
+        case 2: 
+            cout<<"Enter DependentName: ";
+            cin >> dependent.DependentName;
+            break;
+        case 3: 
+            cout<<"Enter Sex: ";
+            cin >> dependent.Sex;
+            break;
+        case 4: 
+            cout<<"Enter BDate: ";
+            cin >> dependent.BDate;
+            break;
+        case 5: 
+            cout<<"Enter Relationship: ";
+            cin >> dependent.Relationship;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+        cout<<" please Enter Again";
+            break;
+        }
+    }while(Iscontinue == true);
+    cout <<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< dependent.ToString()<<endl;
+    cout<< endl;
     return dependent;
 }
 
 Work_on EnterWork_onInfor(Work_on &work_on)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1. ESSN : "<<endl;
-    cout<<"2. PNO : "<<endl;
-    cout<<"3. Hours : "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    bool Iscontinue = true ;
+    cout <<"Old Data:  ";
+    cout << work_on.ToString()<<endl;
+    cout <<endl;
+    do 
     {
-    case 1:
-        cout<<"Enter ESSN: ";
-        cin >> work_on.ESSN;
-        break;
-    case 2: 
-        cout<<"Enter PNO: ";
-        cin >> work_on.PNO;
-        break;
-    case 3: 
-        cout<<"Enter Hours: ";
-        cin >> work_on.Hours;
-        break;
-    default:
-    cout<<" please Enter Again";
-        break;
-    }
+        int n;
+        cout<< endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1. ESSN : "<<endl;
+        cout<<"2. PNO : "<<endl;
+        cout<<"3. Hours : "<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter ESSN: ";
+            cin >> work_on.ESSN;
+            break;
+        case 2: 
+            cout<<"Enter PNO: ";
+            cin >> work_on.PNO;
+            break;
+        case 3: 
+            cout<<"Enter Hours: ";
+            cin >> work_on.Hours;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+        cout<<" please Enter Again";
+            break;
+        }
+    
+    }while(Iscontinue == true);
+    cout <<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< work_on.ToString()<<endl;
+    cout<< endl;
     return work_on;
 }
 
 Project EnterProjectInfor(Project &project)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1. ESSN : "<<endl;
-    cout<<"2. PNO : "<<endl;
-    cout<<"3. Hours : "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    bool Iscontinue = true ;
+    cout <<"Old Data:  ";
+    cout << project.ToString()<<endl;
+    cout <<endl;
+    do
     {
-    case 1:
-        cout<<"Enter PName: ";
-        cin >> project.PName;
-        break;
-    case 2: 
-        cout<<"Enter PNumber: ";
-        cin >> project.PNumber;
-        break;
-    case 3: 
-        cout<<"Enter PLocation: ";
-        cin >> project.PLocation;
-        break;
-    case 4: 
-        cout<<"Enter DNum: ";
-        cin >> project.DNum;
-        break;
-    default:
-    cout<<" please Enter Again";
-        break;
-    }
+        int n;
+        cout<<endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1. PName : "<<endl;
+        cout<<"2. PNumber : "<<endl;
+        cout<<"3. PLocation : "<<endl;
+        cout<<"4. DNum"<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter PName: ";
+            cin >> project.PName;
+            break;
+        case 2: 
+            cout<<"Enter PNumber: ";
+            cin >> project.PNumber;
+            break;
+        case 3: 
+            cout<<"Enter PLocation: ";
+            cin >> project.PLocation;
+            break;
+        case 4: 
+            cout<<"Enter DNum: ";
+            cin >> project.DNum;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+        cout<<" please Enter Again";
+            break;
+        }
+    } while(Iscontinue = true);
+    cout<<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< project.ToString()<<endl;
+    cout<<endl;
     return project;
 }
 
 Department EnterDepartmentInfor(Department &department)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1. DName : "<<endl;
-    cout<<"2. MgrSSN : "<<endl;
-    cout<<"3. Dnumber : "<<endl;
-    cout<<"4. MgrStartDate : "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    bool Iscontinue = true ;
+    cout <<"Old Data:  ";
+    cout << department.ToString()<<endl;
+    cout <<endl;
+    do
     {
-    case 1:
-        cout<<"Enter DName: ";
-        cin >> department.DName;
-        break;
-    case 2: 
-        cout<<"Enter MgrSSN: ";
-        cin >> department.MgrSSN;
-        break;
-    case 3: 
-        cout<<"Enter Dnumber: ";
-        cin >> department.Dnumber;
-        break;
-    case 4: 
-        cout<<"Enter MgrStartDate: ";
-        cin >> department.MgrStartDate;
-        break;
-    default:
-        cout<<" please Enter Again";
-        break;
-    }
+        int n;
+        cout<<endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1. DName : "<<endl;
+        cout<<"2. MgrSSN : "<<endl;
+        cout<<"3. Dnumber : "<<endl;
+        cout<<"4. MgrStartDate : "<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter DName: ";
+            cin >> department.DName;
+            break;
+        case 2: 
+            cout<<"Enter MgrSSN: ";
+            cin >> department.MgrSSN;
+            break;
+        case 3: 
+            cout<<"Enter Dnumber: ";
+            cin >> department.Dnumber;
+            break;
+        case 4: 
+            cout<<"Enter MgrStartDate: ";
+            cin >> department.MgrStartDate;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+            cout<<" please Enter Again";
+            break;
+        }
+    }while(Iscontinue = true);
+    cout<<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< department.ToString()<<endl;
+    cout<<endl;
     return department;
 }
 
 DeptLocations EnterDeptLocationInfor(DeptLocations &deptLocations)
 {   
-    int n;
-    cout<<"Choose Information that you want to edit"<<endl;
-    cout<<"1. DNumber : "<<endl;
-    cout<<"2. DLocation : "<<endl;
-    cout<<"0. Stop"<<endl;
-    cout<<"Your Choice: ";
-    cin >> n;
-    switch (n)
+    bool Iscontinue = true ;
+    cout <<"Old Data:  ";
+    cout << deptLocations.ToString()<<endl;
+    cout <<endl;
+    do
     {
-    case 1:
-        cout<<"Enter DNumber: ";
-        cin >> deptLocations.DNumber;
-        break;
-    case 2: 
-        cout<<"Enter DLocation: ";
-        cin >> deptLocations.DLocation;
-        break;
-    default:
-        cout<<" please Enter Again";
-        break;
-    }
+        int n;
+        cout<<endl;
+        cout<<"Choose Information that you want to edit"<<endl;
+        cout<<"1. DNumber : "<<endl;
+        cout<<"2. DLocation : "<<endl;
+        cout<<"0. Stop"<<endl;
+        cout<<"Your Choice: ";
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            cout<<"Enter DNumber: ";
+            cin >> deptLocations.DNumber;
+            break;
+        case 2: 
+            cout<<"Enter DLocation: ";
+            cin >> deptLocations.DLocation;
+            break;
+        case 0:
+            Iscontinue = false;
+            break;
+        default:
+            cout<<" please Enter Again";
+            break;
+        }
+    }while(Iscontinue = true);
+    cout<<endl;
+    cout << "Data has been changed "<<endl;
+    cout<< deptLocations.ToString()<<endl;
+    cout<<endl;
     return deptLocations;
 }
 

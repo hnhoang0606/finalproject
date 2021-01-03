@@ -25,6 +25,9 @@ public:
     Department(int id, string dName, long mgrSSN, string mgrStartDate,int dNumber);
     string ToString();
     json ToJson();
+    long GetMgrSSN();
+    string GetDName();
+    int GetDnumber();
     friend Department EnterDepartmentInfor(Department &department);
     
 };

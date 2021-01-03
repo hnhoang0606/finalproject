@@ -18,8 +18,9 @@ public:
     // Default Contructor
     Work_on();
     // Contructor with paramaters
-    Work_on(int Id,long eSSN,int pno,int hours);
+    Work_on(int Id,long eSSN,int pno,float hours);
     int GetId();
+    long GetESSN();
     string ToString();
     json ToJson();
     friend Work_on EnterWork_onInfor(Work_on &Work_on);

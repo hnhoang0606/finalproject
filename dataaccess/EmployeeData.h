@@ -27,6 +27,10 @@ public:
 
     bool AddMember(Company* ) override; // Q1
     bool DeleteMember(int ); // Q2
+
+    string Restructure(string supervisorName);
+    float CalculateSalary(long );
+
    
 };
 #endif

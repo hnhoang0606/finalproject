@@ -22,7 +22,6 @@ string Department::ToString(){
     s += MgrStartDate + " ";
     s += to_string(Dnumber) + " ";
     s += "}";
-
     return s;
 }
 
@@ -34,5 +33,19 @@ json Department::ToJson(){
     j["MgrStartDate"] = MgrStartDate;
     j["Dnumber"] = Dnumber;
     return j;
-    
 }
+
+long Department :: GetMgrSSN()
+{
+    return MgrSSN;
+}
+
+string Department::GetDName()
+{
+    return DName;
+}
+int Department::GetDnumber()
+{
+    return Dnumber;
+}
+

@@ -112,3 +112,12 @@ bool ProjectData::DeleteMember(int i)
     return true;   
     }
 }
+
+string ProjectData::GetProjectName(int projectNumber){
+    for(int i = 0; i < _data.size(); ++i){
+        if(_data[i].PNumber == projectNumber){
+            return _data[i].PName;
+        }
+    }
+    return " ";
+}

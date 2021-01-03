@@ -40,5 +40,10 @@ public:
     // void SetSuperSSN(long);
     // void SetDNO(int);
     friend Employee EnterEmployeeInfor(Employee &employee);
+    long GetSSN();
+    char GetSex();
+    int GetSalary();
+    string GetLName();
+    
 };
 #endif

@@ -24,5 +24,6 @@ public:
     bool AddMember(Company* ) override;
     bool DeleteMember(int ) override;
     void Edit_Table();
+    float GetHoursProject(int );
 };
 #endif

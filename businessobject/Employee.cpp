@@ -61,6 +61,25 @@ json Employee :: ToJson()
     return j;
 }
 
+long Employee :: GetSSN()
+{
+    return SSN;
+}
+
+char Employee :: GetSex()
+{
+    return Sex ;
+}
+
+int Employee :: GetSalary()
+{
+    return Salary;
+}
+
+string Employee :: GetLName()
+{
+    return LName;
+}
 // void Employee:: SetFname(string s)
 // {
 //     FName = s;
